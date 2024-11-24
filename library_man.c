@@ -142,23 +142,7 @@ int main() {
     }
 }
 
-// 도서 추가 함수
-// 관리자 확인 
-int check_admin() {
-    char password[20];
-    const char admin_password[] = "admin"; // 관리자 비밀번호 설정
 
-    printf("관리자 비밀번호를 입력하세요: ");
-    scanf(" %s", password);
-
-    if (strcmp(password, admin_password) == 0) {
-        return 1; // 비밀번호 일치
-    }
-    printf("관리자 권한이 없습니다.\n");
-    return 0; // 비밀번호 불일치
-}
-
-// 도서 추가 함수 수정
 void add_book(struct Book library[], int* book_count) {
 
     if (*book_count >= MAX_BOOKS) {
@@ -253,7 +237,7 @@ void borrow_book(struct Book library[], int book_count) {
             return;
         }
     }
-    printf("해당 제목의 도서를 찾을 수 없습니다.\n");
+    printf("해당 제목의 도서를 찾을 수 없습니다.\n"); 
 }
 
 void return_book(struct Book library[], int book_count) {
