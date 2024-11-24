@@ -12,8 +12,8 @@ struct Book {
     char author[50];
     int is_borrowed;    // 대출 상태 (0: 대출 가능, 1: 대출 중)
 };
-void add_book(struct Book library[], int *book_count);
-void delete_book(struct Book library[], int *book_count);
+void add_book(struct Book library[], int* book_count);
+void delete_book(struct Book library[], int* book_count);
 void search_book(struct Book library[], int book_count);
 void display_books(struct Book library[], int book_count);
 void borrow_book(struct Book library[], int book_count);
@@ -26,10 +26,10 @@ int is_admin_logged_in = 0;
 int admin_login() {
     char password[20];
     const char admin_password[] = "admin1234";
-    
+
     printf("관리자 비밀번호를 입력하세요: ");
     scanf(" %s", password);
-    
+
     if (strcmp(password, admin_password) == 0) {
         is_admin_logged_in = 1;
         printf("관리자로 로그인되었습니다.\n");
@@ -65,7 +65,8 @@ int main() {
             printf("6. 도서 반납\n");
             printf("7. 관리자 로그아웃\n");
             printf("8. 프로그램 종료\n");
-        } else {
+        }
+        else {
             // 일반 사용자 메뉴
             printf("1. 도서 검색\n");
             printf("2. 도서 목록 표시\n");
@@ -85,56 +86,57 @@ int main() {
         if (is_admin_logged_in) {
             // 관리자 메뉴 처리
             switch (choice) {
-                case 1:
-                    add_book(library, &book_count);
-                    break;
-                case 2:
-                    delete_book(library, &book_count);
-                    break;
-                case 3:
-                    search_book(library, book_count);
-                    break;
-                case 4:
-                    display_books(library, book_count);
-                    break;
-                case 5:
-                    borrow_book(library, book_count);
-                    break;
-                case 6:
-                    return_book(library, book_count);
-                    break;
-                case 7:
-                    admin_logout();
-                    break;
-                case 8:
-                    printf("프로그램을 종료합니다.\n");
-                    return 0;
-                default:
-                    printf("잘못된 선택입니다.\n");
+            case 1:
+                add_book(library, &book_count);
+                break;
+            case 2:
+                delete_book(library, &book_count);
+                break;
+            case 3:
+                search_book(library, book_count);
+                break;
+            case 4:
+                display_books(library, book_count);
+                break;
+            case 5:
+                borrow_book(library, book_count);
+                break;
+            case 6:
+                return_book(library, book_count);
+                break;
+            case 7:
+                admin_logout();
+                break;
+            case 8:
+                printf("프로그램을 종료합니다.\n");
+                return 0;
+            default:
+                printf("잘못된 선택입니다.\n");
             }
-        } else {
+        }
+        else {
             // 일반 사용자 메뉴 처리
             switch (choice) {
-                case 1:
-                    search_book(library, book_count);
-                    break;
-                case 2:
-                    display_books(library, book_count);
-                    break;
-                case 3:
-                    borrow_book(library, book_count);
-                    break;
-                case 4:
-                    return_book(library, book_count);
-                    break;
-                case 5:
-                    admin_login();
-                    break;
-                case 6:
-                    printf("프로그램을 종료합니다.\n");
-                    return 0;
-                default:
-                    printf("잘못된 선택입니다.\n");
+            case 1:
+                search_book(library, book_count);
+                break;
+            case 2:
+                display_books(library, book_count);
+                break;
+            case 3:
+                borrow_book(library, book_count);
+                break;
+            case 4:
+                return_book(library, book_count);
+                break;
+            case 5:
+                admin_login();
+                break;
+            case 6:
+                printf("프로그램을 종료합니다.\n");
+                return 0;
+            default:
+                printf("잘못된 선택입니다.\n");
             }
         }
     }
@@ -145,10 +147,10 @@ int main() {
 int check_admin() {
     char password[20];
     const char admin_password[] = "admin"; // 관리자 비밀번호 설정
-    
+
     printf("관리자 비밀번호를 입력하세요: ");
     scanf(" %s", password);
-    
+
     if (strcmp(password, admin_password) == 0) {
         return 1; // 비밀번호 일치
     }
@@ -157,11 +159,7 @@ int check_admin() {
 }
 
 // 도서 추가 함수 수정
-void add_book(struct Book library[], int *book_count) {
-    // 관리자 권한 확인
-    if (!check_admin()) {
-        return;
-    }
+void add_book(struct Book library[], int* book_count) {
 
     if (*book_count >= MAX_BOOKS) {
         printf("더 이상 도서를 추가할 수 없습니다.\n");
@@ -190,12 +188,8 @@ void add_book(struct Book library[], int *book_count) {
 }
 
 // 도서 삭제 함수 수정
-void delete_book(struct Book library[], int *book_count) {
-    // 관리자 권한 확인
-    if (!check_admin()) {
-        return;
-    }
-
+void delete_book(struct Book library[], int* book_count) {
+ 
     int id;
     printf("삭제할 도서의 ID를 입력하세요: ");
     scanf("%d", &id);
@@ -247,7 +241,7 @@ void borrow_book(struct Book library[], int book_count) {
     char title[50];
     printf("대출할 도서의 제목을 입력하세요: ");
     scanf(" %[^\n]", title);
-    
+
     for (int i = 0; i < book_count; i++) {
         if (strcmp(library[i].title, title) == 0) {
             if (library[i].is_borrowed) {
@@ -266,7 +260,7 @@ void return_book(struct Book library[], int book_count) {
     char title[50];
     printf("반납할 도서의 제목을 입력하세요: ");
     scanf(" %[^\n]", title);
-    
+
     for (int i = 0; i < book_count; i++) {
         if (strcmp(library[i].title, title) == 0) {
             if (library[i].is_borrowed) {
